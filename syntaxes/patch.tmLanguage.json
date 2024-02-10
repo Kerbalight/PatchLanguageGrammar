@@ -1,0 +1,186 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"scopeName": "source.patch",
+	"fileTypes": ["patch"],
+	"name": "KSP2 Patch",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#functions"
+		},
+		{
+			"include": "#calls"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#values"
+		},
+		{
+			"include": "#variables"
+		},
+		{
+			"include": "#fragments"
+		}
+	],
+	"repository": {
+		"comment": {
+			"patterns": [
+				{
+					"include": "#comment_line"
+				},
+				{
+					"include": "#comment_block"
+				}
+			]
+		},
+		"comment_line": {
+			"name": "comment.line.double-slash.patch",
+			"match": "^\\/\\/.*"
+		},
+		"comment_block": {
+			"name": "comment.block.patch",
+			"begin": "\\/\\*",
+			"captures": {
+				"0": {
+					"name": "punctuation.definition.comment.patch"
+				}
+			},
+			"end": "\\*\\/"
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"include": "#keyword-base"
+				}
+			]
+		},
+		"keyword-base": {
+			"name": "keyword.control.patch",
+			"match": "@[a-z0-9\\-]+"
+		},
+		"values": {
+			"patterns": [
+				{
+					"include": "#string-double"
+				},
+				{
+					"include": "#string-single"
+				},
+				{
+					"include": "#booleans"
+				},
+				{
+					"include": "#floats"
+				},
+				{
+					"include": "#null"
+				}
+			]
+		},
+		"string-double": {
+			"name": "string.quoted.double.patch",
+			"begin": "\"",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.patch"
+				}
+			},
+			"end": "\"",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.patch"
+				}
+			}
+		},
+		"booleans": {
+			"match": "\\b(true|false)\\b",
+			"name": "constant.language.patch"
+		},
+		"floats": {
+			"match": "[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?",
+			"name": "constant.numeric.patch"
+		},
+		"null": {
+			"match": "\\bnull\\b",
+			"name": "constant.language.patch"
+		},
+		"operators": {
+			"match": "(\\b(and|or)\\b)|[+\\-*/%!><=~]+",
+			"name": "keyword.operator.patch"
+		},
+		"string-single": {
+			"name": "string.quoted.single.patch",
+			"begin": "'",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.patch"
+				}
+			},
+			"end": "'",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.patch"
+				}
+			}
+		},
+		"functions": {
+			"name": "entity.meta.function.patch",
+			"match": "(@function)\\s+([a-zA-Z_][a-zA-Z_.\\-0-9]*)",
+			"captures": {
+				"1": {
+					"name": "keyword.control.patch"
+				},
+				"2": {
+					"name": "entity.name.function.patch"
+				}
+			}
+		},
+		"calls": {
+			"match": "([a-zA-Z_][a-zA-Z_.\\-0-9]*)\\(",
+			"captures": {
+				"1": {
+					"name": "entity.name.function.patch"
+				}
+			}
+		},
+		"fragments": {
+			"patterns": [
+				{
+					"include": "#fragment-base"
+				}
+			]
+		},
+		"variables": {
+			"patterns": [
+				{
+					"include": "#variable-normal"
+				},
+				{
+					"include": "#variable-local"
+				},
+				{
+					"include": "#variable-element"
+				}
+			]
+		},
+		"variable-normal": {
+			"match": "\\$[a-zA-Z_][a-zA-Z_.\\-0-9]*",
+			"name": "variable.other.patch"
+		},
+		"variable-local": {
+			"match": "\\$\\$[a-zA-Z_][a-zA-Z_.\\-0-9]*",
+			"name": "variable.parameter.patch"
+		},
+		"variable-element": {
+			"match": "[a-zA-Z_][a-zA-Z_.\\-0-9]*",
+			"name": "string.unquoted.patch"
+		}
+	}
+}
