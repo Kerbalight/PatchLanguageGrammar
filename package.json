@@ -2,7 +2,7 @@
   "name": "patch-language-grammar",
   "displayName": "KSP2 Patch Language Grammar",
   "description": "A grammar-only fork of PatcherLS, the language server for KSP2 Patch Manager patches ",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "engines": {
     "vscode": "^1.86.0"
   },
@@ -16,16 +16,24 @@
     "url": "https://github.com/Kerbalight/PatchLanguageGrammar"
   },
   "contributes": {
-    "languages": [{
-      "id": "patch",
-      "aliases": ["KSP2 Patch"],
-      "extensions": [".patch"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "patch",
-      "scopeName": "source.patch",
-      "path": "./syntaxes/patch.tmLanguage.json"
-    }]
+    "languages": [
+      {
+        "id": "patch",
+        "aliases": [
+          "KSP2 Patch"
+        ],
+        "extensions": [
+          ".patch"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "patch",
+        "scopeName": "source.patch",
+        "path": "./syntaxes/patch.tmLanguage.json"
+      }
+    ]
   }
 }
